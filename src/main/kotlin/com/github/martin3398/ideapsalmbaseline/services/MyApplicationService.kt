@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.martin3398.ideapsalmbaseline.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.martin3398.ideapsalmbaseline.MyBundle
 
 class MyApplicationService {
 
