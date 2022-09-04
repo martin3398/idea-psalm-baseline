@@ -49,6 +49,7 @@ class RemoveFromBaselineIntention(private val baselineIndex: Int) : LocalQuickFi
                 DOMSource(document),
                 StreamResult(os)
             )
+            os.write("\n".toByteArray(Charsets.UTF_8))
 
             FileBasedIndex.getInstance()
                 .scheduleRebuild(PsalmBaselineIndex.key, Throwable("Refresh Psalm Baseline Index"))
