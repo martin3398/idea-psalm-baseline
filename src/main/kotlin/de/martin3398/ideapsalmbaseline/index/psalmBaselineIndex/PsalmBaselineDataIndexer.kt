@@ -12,7 +12,8 @@ class PsalmBaselineDataIndexer : DataIndexer<String, BaselineFileModel, FileCont
     override fun map(inputData: FileContent): MutableMap<String, BaselineFileModel> {
         val parsedBaseline = mutableMapOf<String, BaselineFileModel>()
 
-        val doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(ByteArrayInputStream(inputData.content))
+        val doc =
+            DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(ByteArrayInputStream(inputData.content))
         val files = doc.documentElement.childNodes
 
         for (i in 0 until files.length) {

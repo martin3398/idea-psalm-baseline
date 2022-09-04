@@ -21,7 +21,8 @@ class PsalmBaselineIndex : FileBasedIndexExtension<String, BaselineFileModel>() 
 
     override fun getVersion(): Int = VERSION
 
-    override fun getInputFilter(): FileBasedIndex.InputFilter = FileBasedIndex.InputFilter { it.name == BASELINE_FILENAME }
+    override fun getInputFilter(): FileBasedIndex.InputFilter =
+        FileBasedIndex.InputFilter { it.name == BASELINE_FILENAME }
 
     override fun dependsOnFileContent(): Boolean = true
 
