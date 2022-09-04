@@ -11,7 +11,7 @@ import de.martin3398.ideapsalmbaseline.index.psalmBaselineIndex.model.BaselineFi
 class PsalmBaselineIndex : FileBasedIndexExtension<String, BaselineFileModel>() {
     private val externalizer: DataExternalizer<BaselineFileModel> = PsalmBaselineIndexExternalizer()
 
-    override fun getName(): ID<String, BaselineFileModel> = ID.create("de.martin3398.ideapsalmbaseline")
+    override fun getName(): ID<String, BaselineFileModel> = key
 
     override fun getIndexer(): DataIndexer<String, BaselineFileModel, FileContent> = PsalmBaselineDataIndexer()
 
@@ -31,5 +31,6 @@ class PsalmBaselineIndex : FileBasedIndexExtension<String, BaselineFileModel>() 
 
         // TODO: use config, import from psalm config
         const val BASELINE_FILENAME = "psalm-baseline.xml"
+        val key = ID.create<String, BaselineFileModel>("de.martin3398.ideapsalmbaseline")
     }
 }
