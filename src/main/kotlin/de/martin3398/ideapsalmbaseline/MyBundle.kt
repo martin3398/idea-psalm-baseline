@@ -1,4 +1,4 @@
-package com.github.martin3398.ideapsalmbaseline
+package de.martin3398.ideapsalmbaseline
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls
