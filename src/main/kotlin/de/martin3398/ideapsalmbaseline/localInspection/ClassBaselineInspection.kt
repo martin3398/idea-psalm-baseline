@@ -34,7 +34,7 @@ class ClassBaselineInspection : LocalInspectionTool() {
             fileModel.errors.sumOf { it.occurrences }
         }
 
-        return Visitor(classNameIdentifierPattern, errorCount, holder)
+        return Visitor(classNameIdentifierPattern, errorCount, holder, baselineErrors[0])
     }
 
     private fun getRelativeFilename(abs: String, base: String): String {

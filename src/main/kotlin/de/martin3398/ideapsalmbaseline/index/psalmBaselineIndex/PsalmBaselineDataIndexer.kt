@@ -21,15 +21,15 @@ class PsalmBaselineDataIndexer : DataIndexer<String, BaselineFileModel, FileCont
             if (fileNode !is Element || fileNode.nodeName != "file") continue
 
             val fileName = fileNode.getAttribute("src")
-            val model = parseFile(fileNode)
+            val errors = parseFile(fileNode)
 
-            parsedBaseline[fileName] = model
+            parsedBaseline[fileName] = BaselineFileModel(errors, i)
         }
 
         return parsedBaseline
     }
 
-    private fun parseFile(node: Element): BaselineFileModel {
+    private fun parseFile(node: Element): List<BaselineErrorsModel> {
         val errors = mutableListOf<BaselineErrorsModel>()
 
         val errorNodes = node.childNodes
@@ -44,7 +44,7 @@ class PsalmBaselineDataIndexer : DataIndexer<String, BaselineFileModel, FileCont
             errors.add(BaselineErrorsModel(type, occurrences, code))
         }
 
-        return BaselineFileModel(errors)
+        return errors
     }
 
     private fun parseCodeNodes(errorNode: Element): List<String> {
