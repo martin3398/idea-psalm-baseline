@@ -5,6 +5,7 @@
     <vendor>martin3398</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.jetbrains.php</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <fileBasedIndex implementation="de.martin3398.ideapsalmbaseline.index.PsalmBaselineIndex"/>
