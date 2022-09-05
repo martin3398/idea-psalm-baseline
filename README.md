@@ -1,8 +1,8 @@
 # idea-psalm-baseline
 
 ![Build](https://github.com/martin3398/idea-psalm-baseline/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/19857-idea-psalm-baseline.svg)](https://plugins.jetbrains.com/plugin/19857-idea-psalm-baseline)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/19857-idea-psalm-baseline.svg)](https://plugins.jetbrains.com/plugin/19857-idea-psalm-baseline)
+[![Version](https://img.shields.io/jetbrains/plugin/v/19857.svg)](https://plugins.jetbrains.com/plugin/19857)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/19857.svg)](https://plugins.jetbrains.com/plugin/19857)
 
 
 <!-- Plugin description -->
