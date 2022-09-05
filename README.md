@@ -15,8 +15,7 @@ It also comes with support of removing the baseline errors for the specific file
 
 - Using IDE built-in plugin system:
 
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "
-  idea-psalm-baseline"</kbd> >
+  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "idea-psalm-baseline"</kbd> >
   <kbd>Install Plugin</kbd>
 
 - Manually:
