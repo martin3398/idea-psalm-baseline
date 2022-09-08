@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>de.martin3398.ideapsalmbaseline</id>
-    <name>Idea-Psalm-Baseline</name>
+    <name>Psalm-Baseline</name>
     <vendor>martin3398</vendor>
 
     <depends>com.intellij.modules.platform</depends>
