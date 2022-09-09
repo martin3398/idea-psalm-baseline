@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+## [0.0.4]
+### Added
+- fixed idea in plugin name
+
 ## [0.0.3]
 ### Added
 - added icon
@@ -18,4 +22,3 @@
 - added inspection to display baseline errors
 - added index to parse the baseline
 - Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
-
