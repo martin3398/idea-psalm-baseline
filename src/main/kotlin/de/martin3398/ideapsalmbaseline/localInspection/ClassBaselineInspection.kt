@@ -17,7 +17,11 @@ import kotlin.io.path.relativeTo
 class ClassBaselineInspection : LocalInspectionTool() {
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor {
         val file = holder.file
-        val filename = getRelativeFilename(file.virtualFile.path, holder.project.basePath!!)
+        val filename = try {
+            getRelativeFilename(file.virtualFile.path, holder.project.basePath!!)
+        } catch (e: IllegalArgumentException) {
+            return super.buildVisitor(holder, isOnTheFly)
+        }
 
         if (file !is PhpFile || IGNORED_DIRS.any { filename.startsWith(it) }) {
             return super.buildVisitor(holder, isOnTheFly)
