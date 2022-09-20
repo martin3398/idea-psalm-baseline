@@ -4,6 +4,9 @@
 
 ## [Unreleased]
 
+## [0.0.5]
+* fix: catch relativeTo exception
+
 ## [0.0.4]
 ### Added
 - fixed idea in plugin name
