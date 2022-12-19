@@ -4,8 +4,10 @@
 
 ## [Unreleased]
 
+## [1.0.0]
+* Release Version 1.0.0
+
 ## [0.0.5]
-* fix: catch relativeTo exception
 
 ## [0.0.4]
 ### Added
