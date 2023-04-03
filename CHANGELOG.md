@@ -4,8 +4,10 @@
 
 ## [Unreleased]
 
+## [1.1.1]
+* release fix
+
 ## [1.0.0]
-* Release Version 1.0.0
 
 ## [0.0.5]
 
