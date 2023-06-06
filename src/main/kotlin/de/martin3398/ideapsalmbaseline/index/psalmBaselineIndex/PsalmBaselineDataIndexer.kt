@@ -38,8 +38,8 @@ class PsalmBaselineDataIndexer : DataIndexer<String, BaselineFileModel, FileCont
             if (errorNode !is Element) continue
 
             val type = errorNode.nodeName
-            val occurrences = errorNode.getAttribute("occurrences").toInt()
             val code = parseCodeNodes(errorNode)
+            val occurrences = errorNode.getAttribute("occurrences").toIntOrNull() ?: code.size
 
             errors.add(BaselineErrorsModel(type, occurrences, code))
         }
