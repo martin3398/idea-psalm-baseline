@@ -4,33 +4,51 @@
 
 ## [Unreleased]
 
+## [1.1.3] - 2023-06-06
+- bugfix: infer occurrences from code count if absent by @martin3398 in https://github.com/martin3398/idea-psalm-baseline/pull/9
+
 ## [1.1.2]
-* fix upper version
+- fix upper version
 
 ## [1.1.1]
-* release fix
+- release fix
 
 ## [1.0.0]
-* Release Version 1.0.0
+- Release Version 1.0.0
 
 ## [0.0.5]
-* fix: catch relativeTo exception
+- fix: catch relativeTo exception
 
 ## [0.0.4]
+
 ### Added
 - fixed idea in plugin name
 
 ## [0.0.3]
+
 ### Added
 - added icon
 
 ## [0.0.2]
+
 ### Added
 - bugfix: add blank line to end of baseline
 
 ## [0.0.1]
+
 ### Added
 - added intention to remove baseline errors
 - added inspection to display baseline errors
 - added index to parse the baseline
 - Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
+
+[Unreleased]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.1.3...HEAD
+[1.1.3]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.1.2...v1.1.3
+[1.1.2]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.1.1...v1.1.2
+[1.1.1]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.0.0...v1.1.1
+[1.0.0]: https://github.com/martin3398/idea-psalm-baseline/compare/v0.0.5...v1.0.0
+[0.0.5]: https://github.com/martin3398/idea-psalm-baseline/compare/v0.0.4...v0.0.5
+[0.0.4]: https://github.com/martin3398/idea-psalm-baseline/compare/v0.0.3...v0.0.4
+[0.0.3]: https://github.com/martin3398/idea-psalm-baseline/compare/v0.0.2...v0.0.3
+[0.0.2]: https://github.com/martin3398/idea-psalm-baseline/compare/v0.0.1...v0.0.2
+[0.0.1]: https://github.com/martin3398/idea-psalm-baseline/commits/v0.0.1
