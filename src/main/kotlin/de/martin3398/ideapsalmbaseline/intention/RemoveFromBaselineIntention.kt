@@ -23,13 +23,13 @@ class RemoveFromBaselineIntention(private val baselineIndex: Int) : LocalQuickFi
     override fun applyFix(project: Project, descriptor: ProblemDescriptor) {
         CommandProcessor.getInstance().executeCommand(
             project,
-            removeFromBaseline(project.basePath + "/" + PsalmBaselineIndex.BASELINE_FILENAME),
+            removeFromBaselineCallback(project.basePath + "/" + PsalmBaselineIndex.BASELINE_FILENAME),
             NAME,
             null
         )
     }
 
-    private fun removeFromBaseline(baselineFilename: String): () -> Unit {
+    private fun removeFromBaselineCallback(baselineFilename: String): () -> Unit {
         return fun() {
             val domFactory: DocumentBuilderFactory = DocumentBuilderFactory.newInstance()
             val domBuilder: DocumentBuilder = domFactory.newDocumentBuilder()
