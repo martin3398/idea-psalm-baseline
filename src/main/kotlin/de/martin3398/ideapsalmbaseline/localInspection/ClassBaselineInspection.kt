@@ -11,14 +11,13 @@ import com.jetbrains.php.lang.psi.PhpFile
 import com.jetbrains.php.lang.psi.elements.PhpClass
 import de.martin3398.ideapsalmbaseline.index.PsalmBaselineIndex
 import de.martin3398.ideapsalmbaseline.localInspection.classBaselineInspection.Visitor
-import kotlin.io.path.Path
-import kotlin.io.path.relativeTo
+import de.martin3398.ideapsalmbaseline.util.getRelativePath
 
 class ClassBaselineInspection : LocalInspectionTool() {
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor {
         val file = holder.file
         val filename = try {
-            getRelativeFilename(file.virtualFile.path, holder.project.basePath!!)
+            getRelativePath(file.virtualFile.path, holder.project.basePath!!)
         } catch (e: IllegalArgumentException) {
             return super.buildVisitor(holder, isOnTheFly)
         }
@@ -39,13 +38,6 @@ class ClassBaselineInspection : LocalInspectionTool() {
         }
 
         return Visitor(classNameIdentifierPattern, errorCount, holder, baselineErrors[0])
-    }
-
-    private fun getRelativeFilename(abs: String, base: String): String {
-        val absPath = Path(abs)
-        val basePath = Path(base)
-
-        return absPath.relativeTo(basePath).toString()
     }
 
     companion object {
