@@ -1,16 +1,23 @@
 package de.martin3398.ideapsalmbaseline.index.psalmBaselineIndex
 
+import com.intellij.openapi.project.ProjectManager
 import com.intellij.util.indexing.DataIndexer
 import com.intellij.util.indexing.FileContent
-import de.martin3398.ideapsalmbaseline.index.psalmBaselineIndex.model.BaselineErrorsModel
-import de.martin3398.ideapsalmbaseline.index.psalmBaselineIndex.model.BaselineFileModel
+import de.martin3398.ideapsalmbaseline.index.psalmBaselineIndex.model.PsalmBaselineErrorModel
+import de.martin3398.ideapsalmbaseline.index.psalmBaselineIndex.model.PsalmBaselineModel
 import org.w3c.dom.Element
 import java.io.ByteArrayInputStream
 import javax.xml.parsers.DocumentBuilderFactory
+import kotlin.io.path.Path
+import kotlin.io.path.relativeTo
 
-class PsalmBaselineDataIndexer : DataIndexer<String, BaselineFileModel, FileContent> {
-    override fun map(inputData: FileContent): MutableMap<String, BaselineFileModel> {
-        val parsedBaseline = mutableMapOf<String, BaselineFileModel>()
+class PsalmBaselineDataIndexer : DataIndexer<String, PsalmBaselineModel, FileContent> {
+    override fun map(inputData: FileContent): MutableMap<String, PsalmBaselineModel> {
+        val parsedBaseline = mutableMapOf<String, PsalmBaselineModel>()
+        val baselinePath = inputData.file.path
+        val baselineDir = Path(baselinePath).parent
+        val projectPath = Path(ProjectManager.getInstance().openProjects[0].basePath!!)
+        val relativeBaselinePath = baselineDir.relativeTo(projectPath)
 
         val doc =
             DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(ByteArrayInputStream(inputData.content))
@@ -18,30 +25,34 @@ class PsalmBaselineDataIndexer : DataIndexer<String, BaselineFileModel, FileCont
 
         for (i in 0 until files.length) {
             val fileNode = files.item(i)
-            if (fileNode !is Element || fileNode.nodeName != "file") continue
+            if (fileNode !is Element || fileNode.nodeName != "file") {
+                continue
+            }
 
-            val fileName = fileNode.getAttribute("src")
+            val fileName = relativeBaselinePath.resolve(fileNode.getAttribute("src")).toString()
             val errors = parseFile(fileNode)
 
-            parsedBaseline[fileName] = BaselineFileModel(errors, i)
+            parsedBaseline[fileName] = PsalmBaselineModel(errors, i, baselinePath)
         }
 
         return parsedBaseline
     }
 
-    private fun parseFile(node: Element): List<BaselineErrorsModel> {
-        val errors = mutableListOf<BaselineErrorsModel>()
+    private fun parseFile(node: Element): List<PsalmBaselineErrorModel> {
+        val errors = mutableListOf<PsalmBaselineErrorModel>()
 
         val errorNodes = node.childNodes
         for (i in 0 until errorNodes.length) {
             val errorNode = errorNodes.item(i)
-            if (errorNode !is Element) continue
+            if (errorNode !is Element) {
+                continue
+            }
 
             val type = errorNode.nodeName
             val code = parseCodeNodes(errorNode)
             val occurrences = errorNode.getAttribute("occurrences").toIntOrNull() ?: code.size
 
-            errors.add(BaselineErrorsModel(type, occurrences, code))
+            errors.add(PsalmBaselineErrorModel(type, occurrences, code))
         }
 
         return errors
@@ -52,7 +63,9 @@ class PsalmBaselineDataIndexer : DataIndexer<String, BaselineFileModel, FileCont
         val codes = mutableListOf<String>()
         for (i in 0 until codeNodes.length) {
             val codeNode = codeNodes.item(i)
-            if (codeNode !is Element || codeNode.textContent == null) continue
+            if (codeNode !is Element || codeNode.textContent == null) {
+                continue
+            }
 
             codes.add(codeNode.textContent)
         }
