@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+## [1.2.0] - 2023-06-07
+- Feature: Index on multi-baseline-projects/parent-projects
+- 8 no errors displayed on multi project by @martin3398 in https://github.com/martin3398/idea-psalm-baseline/pull/11
+
 ## [1.1.3] - 2023-06-06
 - bugfix: infer occurrences from code count if absent by @martin3398 in https://github.com/martin3398/idea-psalm-baseline/pull/9
 
@@ -42,7 +46,8 @@
 - added index to parse the baseline
 - Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
 
-[Unreleased]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.1.3...HEAD
+[Unreleased]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.1.3...v1.2.0
 [1.1.3]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.0.0...v1.1.1
