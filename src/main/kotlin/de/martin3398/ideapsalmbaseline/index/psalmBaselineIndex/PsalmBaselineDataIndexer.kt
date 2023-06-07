@@ -14,9 +14,10 @@ import kotlin.io.path.relativeTo
 class PsalmBaselineDataIndexer : DataIndexer<String, BaselineFileModel, FileContent> {
     override fun map(inputData: FileContent): MutableMap<String, BaselineFileModel> {
         val parsedBaseline = mutableMapOf<String, BaselineFileModel>()
-        val baselinePath = Path(inputData.file.path).parent
+        val baselinePath = inputData.file.path
+        val baselineDir = Path(baselinePath).parent
         val projectPath = Path(ProjectManager.getInstance().openProjects[0].basePath!!)
-        val relativeBaselinePath = baselinePath.relativeTo(projectPath)
+        val relativeBaselinePath = baselineDir.relativeTo(projectPath)
 
         val doc =
             DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(ByteArrayInputStream(inputData.content))
@@ -29,7 +30,7 @@ class PsalmBaselineDataIndexer : DataIndexer<String, BaselineFileModel, FileCont
             val fileName = relativeBaselinePath.resolve(fileNode.getAttribute("src")).toString()
             val errors = parseFile(fileNode)
 
-            parsedBaseline[fileName] = BaselineFileModel(errors, i)
+            parsedBaseline[fileName] = BaselineFileModel(errors, i, baselinePath)
         }
 
         return parsedBaseline

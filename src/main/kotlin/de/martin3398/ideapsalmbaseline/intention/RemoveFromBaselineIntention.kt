@@ -17,24 +17,24 @@ import javax.xml.transform.TransformerFactory
 import javax.xml.transform.dom.DOMSource
 import javax.xml.transform.stream.StreamResult
 
-class RemoveFromBaselineIntention(private val baselineIndex: Int) : LocalQuickFix {
+class RemoveFromBaselineIntention(private val baselineIndex: Int, private val baselineFilePath: String) : LocalQuickFix {
     override fun getFamilyName(): String = NAME
 
     override fun applyFix(project: Project, descriptor: ProblemDescriptor) {
         CommandProcessor.getInstance().executeCommand(
             project,
-            removeFromBaselineCallback(project.basePath + "/" + PsalmBaselineIndex.BASELINE_FILENAME),
+            removeFromBaselineCallback(),
             NAME,
             null
         )
     }
 
-    private fun removeFromBaselineCallback(baselineFilename: String): () -> Unit {
+    private fun removeFromBaselineCallback(): () -> Unit {
         return fun() {
             val domFactory: DocumentBuilderFactory = DocumentBuilderFactory.newInstance()
             val domBuilder: DocumentBuilder = domFactory.newDocumentBuilder()
-            val document: Document = domBuilder.parse(baselineFilename)
-            val os: OutputStream = FileOutputStream(baselineFilename)
+            val document: Document = domBuilder.parse(baselineFilePath)
+            val os: OutputStream = FileOutputStream(baselineFilePath)
 
             val files = document.documentElement
             files.removeChild(files.childNodes.item(baselineIndex))

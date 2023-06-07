@@ -20,7 +20,7 @@ class Visitor(
                 element,
                 "$errorCount errors are ignored by the Psalm Baseline.",
                 ProblemHighlightType.WARNING,
-                RemoveFromBaselineIntention(baselineFileModel.index)
+                RemoveFromBaselineIntention(baselineFileModel.index, baselineFileModel.file)
             )
             return
         }
