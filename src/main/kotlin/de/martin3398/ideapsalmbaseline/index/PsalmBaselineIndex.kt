@@ -28,8 +28,6 @@ class PsalmBaselineIndex : FileBasedIndexExtension<String, BaselineFileModel>() 
 
     companion object {
         const val VERSION = 1
-
-        // TODO: use config, import from psalm config
         const val BASELINE_FILENAME = "psalm-baseline.xml"
         val key = ID.create<String, BaselineFileModel>("de.martin3398.ideapsalmbaseline")
     }
