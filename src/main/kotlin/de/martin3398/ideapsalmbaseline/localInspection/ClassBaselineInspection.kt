@@ -15,22 +15,27 @@ import de.martin3398.ideapsalmbaseline.util.getRelativePath
 
 class ClassBaselineInspection : LocalInspectionTool() {
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor {
+        return tryBuildVisitor(holder) ?: super.buildVisitor(holder, isOnTheFly)
+    }
+
+    fun tryBuildVisitor(holder: ProblemsHolder): PsiElementVisitor? {
         val file = holder.file
         val filename = try {
             getRelativePath(file.virtualFile.path, holder.project.basePath!!)
         } catch (e: IllegalArgumentException) {
-            return super.buildVisitor(holder, isOnTheFly)
+            return null
         }
 
         if (file !is PhpFile || IGNORED_DIRS.any { filename.startsWith(it) }) {
-            return super.buildVisitor(holder, isOnTheFly)
+            return null
         }
 
-        val baselineErrors = FileBasedIndex.getInstance()
+        val baselineErrors = FileBasedIndex
+            .getInstance()
             .getValues(PsalmBaselineIndex.key, filename, GlobalSearchScope.allScope(holder.project))
 
         if (baselineErrors.isEmpty()) {
-            return super.buildVisitor(holder, isOnTheFly)
+            return null
         }
 
         val errorCount = baselineErrors.sumOf { fileModel ->
