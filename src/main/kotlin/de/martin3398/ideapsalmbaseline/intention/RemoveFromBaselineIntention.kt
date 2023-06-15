@@ -3,6 +3,7 @@ package de.martin3398.ideapsalmbaseline.intention
 import com.intellij.codeInspection.LocalQuickFix
 import com.intellij.codeInspection.ProblemDescriptor
 import com.intellij.openapi.command.CommandProcessor
+import com.intellij.openapi.diagnostic.RuntimeExceptionWithAttachments
 import com.intellij.openapi.project.Project
 import com.intellij.util.indexing.FileBasedIndex
 import de.martin3398.ideapsalmbaseline.index.PsalmBaselineIndex
@@ -21,12 +22,18 @@ class RemoveFromBaselineIntention(private val baselineIndex: Int, private val ba
     override fun getFamilyName(): String = NAME
 
     override fun applyFix(project: Project, descriptor: ProblemDescriptor) {
-        CommandProcessor.getInstance().executeCommand(
-            project,
-            removeFromBaselineCallback(),
-            NAME,
-            null
-        )
+        try {
+            CommandProcessor.getInstance().executeCommand(
+                project,
+                removeFromBaselineCallback(),
+                NAME,
+                null
+            )
+        } catch (e: RuntimeExceptionWithAttachments) {
+            if (e.userMessage != "Access is allowed from write thread only") {
+                throw e
+            }
+        }
     }
 
     private fun removeFromBaselineCallback(): () -> Unit {
