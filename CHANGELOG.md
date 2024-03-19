@@ -4,6 +4,9 @@
 
 ## [Unreleased]
 
+## [1.2.3] - 2024-03-19
+- Compatibility for Intellij 2024.1 (fixed)
+
 ## [1.2.2] - 2024-03-18
 - Compatibility for Intellij 2024.1
 
@@ -52,7 +55,8 @@
 - added index to parse the baseline
 - Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
 
-[Unreleased]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.2.2...HEAD
+[Unreleased]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.2.3...HEAD
+[1.2.3]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.2.1...v1.2.3
 [1.2.2]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.1.3...v1.2.0
