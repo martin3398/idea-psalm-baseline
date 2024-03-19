@@ -52,7 +52,7 @@ class RemoveFromBaselineIntention(private val baselineIndex: Int, private val ba
             os.write("\n".toByteArray(Charsets.UTF_8))
 
             FileBasedIndex.getInstance()
-                .scheduleRebuild(PsalmBaselineIndex.key, Throwable("Refresh Psalm Baseline Index"))
+                .requestRebuild(PsalmBaselineIndex.key, Throwable("Refresh Psalm Baseline Index"))
         }
     }
 
