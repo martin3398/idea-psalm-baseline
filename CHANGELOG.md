@@ -6,7 +6,7 @@
 
 ## [1.3.0] - 2024-03-19
 
-- Removed drprecation of scheduleRebuild
+- Removed deprecation of scheduleRebuild
 
 ## [1.2.3] - 2024-03-19
 
