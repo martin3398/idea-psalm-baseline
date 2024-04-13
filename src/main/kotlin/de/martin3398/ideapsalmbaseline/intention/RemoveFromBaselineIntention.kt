@@ -2,6 +2,7 @@ package de.martin3398.ideapsalmbaseline.intention
 
 import com.intellij.codeInspection.LocalQuickFix
 import com.intellij.codeInspection.ProblemDescriptor
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.command.CommandProcessor
 import com.intellij.openapi.diagnostic.RuntimeExceptionWithAttachments
 import com.intellij.openapi.project.Project
@@ -38,21 +39,23 @@ class RemoveFromBaselineIntention(private val baselineIndex: Int, private val ba
 
     private fun removeFromBaselineCallback(): () -> Unit {
         return fun() {
-            val document = getDocument(baselineFilePath)
-            val files = document.documentElement
+            ApplicationManager.getApplication().invokeLater {
+                val document = getDocument(baselineFilePath)
+                val files = document.documentElement
 
-            files.removeChild(files.childNodes.item(baselineIndex))
+                files.removeChild(files.childNodes.item(baselineIndex))
 
-            val os: OutputStream = FileOutputStream(baselineFilePath)
-            os.write(BASELINE_XML_DECLARATION.toByteArray(Charsets.UTF_8))
-            getTransformer().transform(
-                DOMSource(document),
-                StreamResult(os)
-            )
-            os.write("\n".toByteArray(Charsets.UTF_8))
+                val os: OutputStream = FileOutputStream(baselineFilePath)
+                os.write(BASELINE_XML_DECLARATION.toByteArray(Charsets.UTF_8))
+                getTransformer().transform(
+                    DOMSource(document),
+                    StreamResult(os)
+                )
+                os.write("\n".toByteArray(Charsets.UTF_8))
 
-            FileBasedIndex.getInstance()
-                .requestRebuild(PsalmBaselineIndex.key, Throwable("Refresh Psalm Baseline Index"))
+                FileBasedIndex.getInstance()
+                    .requestRebuild(PsalmBaselineIndex.key, Throwable("Refresh Psalm Baseline Index"))
+            }
         }
     }
 
