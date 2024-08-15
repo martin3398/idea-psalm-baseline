@@ -6,7 +6,7 @@
 
 ## [1.3.2] - 2024-08-15
 
-- Enable Forward COmpatibility
+- Enable Forward Compatibility
 
 ## [1.3.1] - 2024-04-13
 
