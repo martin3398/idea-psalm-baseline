@@ -1,6 +1,6 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# idea-psalm-baseline Changelog
+# psalm-baseline Changelog
 
 ## [Unreleased]
 
