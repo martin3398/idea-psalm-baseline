@@ -6,9 +6,12 @@ import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.command.CommandProcessor
 import com.intellij.openapi.diagnostic.RuntimeExceptionWithAttachments
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.vcs.changes.VcsDirtyScopeManager
+import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.util.indexing.FileBasedIndex
 import de.martin3398.ideapsalmbaseline.index.PsalmBaselineIndex
 import org.w3c.dom.Document
+import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 import javax.xml.parsers.DocumentBuilderFactory
@@ -26,7 +29,7 @@ class RemoveFromBaselineIntention(private val baselineIndex: Int, private val ba
         try {
             CommandProcessor.getInstance().executeCommand(
                 project,
-                removeFromBaselineCallback(),
+                removeFromBaselineCallback(project),
                 NAME,
                 null
             )
@@ -37,7 +40,7 @@ class RemoveFromBaselineIntention(private val baselineIndex: Int, private val ba
         }
     }
 
-    private fun removeFromBaselineCallback(): () -> Unit {
+    private fun removeFromBaselineCallback(project: Project): () -> Unit {
         return fun() {
             ApplicationManager.getApplication().invokeLater {
                 val document = getDocument(baselineFilePath)
@@ -53,8 +56,17 @@ class RemoveFromBaselineIntention(private val baselineIndex: Int, private val ba
                 )
                 os.write("\n".toByteArray(Charsets.UTF_8))
 
-                FileBasedIndex.getInstance()
-                    .requestRebuild(PsalmBaselineIndex.key, Throwable("Refresh Psalm Baseline Index"))
+                val virtualFile = LocalFileSystem.getInstance().refreshAndFindFileByIoFile(File(baselineFilePath))
+                virtualFile?.let {
+                    it.refresh(false, false)
+
+                    VcsDirtyScopeManager.getInstance(project).fileDirty(it)
+
+                    FileBasedIndex.getInstance().requestRebuild(
+                        PsalmBaselineIndex.key,
+                        Throwable("Refresh Psalm Baseline Index")
+                    )
+                }
             }
         }
     }
