@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+## [1.4.0] - 2025-05-22
+
+- Refreshes file indices after intent action
+
 ## [1.3.2] - 2024-08-15
 
 - Enable Forward Compatibility
@@ -81,11 +85,12 @@
 - added index to parse the baseline
 - Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
 
-[Unreleased]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.3.2...HEAD
+[Unreleased]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.3.2...v1.4.0
 [1.3.2]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.3.1...v1.3.2
 [1.3.1]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.2.3...v1.3.0
-[1.2.3]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.2.1...v1.2.3
+[1.2.3]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.2.2...v1.2.3
 [1.2.2]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/martin3398/idea-psalm-baseline/compare/v1.1.3...v1.2.0
