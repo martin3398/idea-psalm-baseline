@@ -3,7 +3,7 @@
     <name>Psalm-Baseline</name>
     <vendor>martin3398</vendor>
 
-    <depends>com.intellij.modules.php</depends>
+    <depends>com.intellij.modules.platform</depends>
     <depends>com.jetbrains.php</depends>
 
     <extensions defaultExtensionNs="com.intellij">
